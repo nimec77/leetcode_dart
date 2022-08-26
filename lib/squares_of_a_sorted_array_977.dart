@@ -1,4 +1,4 @@
-class SquaresOfASortedArray {
+class SquaresOfASortedArray977 {
   static List<int> sortedSquares(List<int> nums) {
     final result = List<int>.filled(nums.length, 0, growable: false);
     var left = 0, right = nums.length - 1;

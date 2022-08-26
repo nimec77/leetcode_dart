@@ -1,4 +1,4 @@
-class FindNumbersWithEvenNumberOfDigits {
+class FindNumbersWithEvenNumberOfDigits1295 {
   static int findNumbers(List<int> nums) {
     var count = 0;
     for (var i = 0; i < nums.length; i++) {

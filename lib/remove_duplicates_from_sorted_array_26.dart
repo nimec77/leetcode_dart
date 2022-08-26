@@ -1,4 +1,4 @@
-class RemoveDuplicatesFromSortedArray {
+class RemoveDuplicatesFromSortedArray26 {
   static int removeDuplicated(List<int> nums) {
     if (nums.isEmpty) {
       return 0;

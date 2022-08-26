@@ -4,7 +4,7 @@ class ListNode {
   ListNode(this.val, [this.next]);
 }
 
-class MergeKSortedLists {
+class MergeKSortedLists23 {
   static ListNode? mergeKList(List<ListNode?> lists) {
     ListNode? mergeTwoLists(ListNode? l1, ListNode? l2) {
       ListNode? head = ListNode(0);

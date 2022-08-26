@@ -1,4 +1,4 @@
-class IntToRoman {
+class IntToRoman485 {
   static String intToRoman(int num) {
     final sb = StringBuffer();
 

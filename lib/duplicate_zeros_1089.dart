@@ -1,4 +1,4 @@
-class DuplicateZeros {
+class DuplicateZeros1089 {
   static void duplicateZeros(List<int> arr) {
     var zeros = arr.where((element) => element == 0).length;
 

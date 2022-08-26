@@ -1,4 +1,4 @@
-class CheckIfNAndItsDoubleExist {
+class CheckIfNAndItsDoubleExist1346 {
   static bool checkIfExist(List<int> arr) {
     final map = <int, int>{};
     for (var i = 0; i < arr.length; i++) {

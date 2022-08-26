@@ -1,4 +1,4 @@
-class RemoveElement {
+class RemoveElement27 {
   int removeElement(List<int> nums, int val) {
     var i = 0, n = nums.length;
     while (i < n) {
