@@ -8,6 +8,9 @@ class MaximumSubarray53 {
       sum += nums[i];
 
       max = math.max(sum, max);
+      if (sum < 0) {
+        sum = 0;
+      }
     }
     return max;
   }
