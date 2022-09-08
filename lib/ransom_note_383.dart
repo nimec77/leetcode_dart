@@ -3,7 +3,7 @@ class RansomNote383 {
     final ransomNoteMap = <String, int>{};
     for (var i = 0; i < ransomNote.length; i++) {
       final char = ransomNote[i];
-      ransomNoteMap[char] = (ransomNoteMap[char] ?? 0) + 1;
+      ransomNoteMap[char] = ransomNoteMap.putIfAbsent(char, () => 0) + 1;
     }
     for (var i = 0; i < magazine.length; i++) {
       final char = magazine[i];
@@ -40,7 +40,7 @@ class RansomNote383 {
     final letters = content.split('');
     final dictionary = <String, int>{};
     for (final e in letters) {
-      dictionary[e] = (dictionary[e] ?? 0) + 1;
+      dictionary[e] = dictionary.putIfAbsent(e, () => 0) + 1;
     }
     return dictionary;
   }
