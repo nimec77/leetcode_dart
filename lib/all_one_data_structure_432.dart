@@ -2,56 +2,74 @@ import 'dart:math' as math;
 
 // https://leetcode.com/problems/all-oone-data-structure/
 class AllOne {
-  final map = <String, int>{};
-  final countMap = <int, Set<String>>{};
-  int min = 0;
-  int max = 0;
+  final lookup = <int, Set<String>>{};
+  final counts = <String, int>{};
+  var maxIndex = 0;
+  var minIndex = 0;
 
   AllOne();
 
   void inc(String key) {
-    if (min == 0) {
-      min = 1;
-    }
-    int count = map[key] ?? 0;
-    map[key] = count + 1;
-    if (count > 0) {
-      countMap[count]!.remove(key);
-      if (countMap[count]!.isEmpty) {
-        countMap.remove(count);
-        if (count == min) {
-          min = countMap.keys.isEmpty ? 0 : countMap.keys.first;
-        }
+    if (!counts.containsKey(key)) {
+      counts[key] = 1;
+      lookup.putIfAbsent(1, () => <String>{}).add(key);
+      minIndex = 1;
+      if (maxIndex < 1) {
+        maxIndex = 1;
       }
+    } else {
+      var count = counts[key]!;
+      lookup[count]?.remove(key);
+      if (minIndex == count && (lookup[count]?.isEmpty ?? true)) {
+        minIndex++;
+      }
+      count++;
+      counts[key] = count;
+      lookup.putIfAbsent(count, () => <String>{}).add(key);
+
+      maxIndex = math.max(count, maxIndex);
     }
-    countMap.putIfAbsent(count + 1, () => <String>{}).add(key);
-    max = math.max(max, count + 1);
   }
 
   void dec(String key) {
-    int count = map[key] ?? 0;
-    if (count == 0) {
+    if (!counts.containsKey(key)) {
       return;
     }
-    map[key] = count - 1;
-    countMap[count]!.remove(key);
-    if (count > 1) {
-      countMap.putIfAbsent(count - 1, () => <String>{}).add(key);
+    var count = counts[key]!;
+    lookup[count]?.remove(key);
+    if (minIndex == count && (lookup[count]?.isEmpty ?? true)) {
+      minIndex--;
     }
-    if (countMap[count]!.isEmpty) {
-      countMap.remove(count);
-      if (count == max) {
-        max = countMap.keys.isEmpty ? 0 : countMap.keys.last;
-      }
+    if (count == maxIndex && (lookup[count]?.isEmpty ?? true)) {
+      maxIndex--;
     }
-    min = math.min(count - 1, min);
+    count--;
+    counts[key] = count;
+
+    if (count > 0) {
+      lookup.putIfAbsent(count, () => <String>{}).add(key);
+    } else {
+      counts.remove(key);
+    }
   }
 
   String getMaxKey() {
-    return max == 0 ? '' : countMap[max]!.first;
+    if (lookup[maxIndex]?.isNotEmpty?? false) {
+      return lookup[maxIndex]!.first;
+    }
+    return '';
   }
 
   String getMinKey() {
-    return min == 0 ? '' : countMap[min]!.first;
+    if (lookup[minIndex]?.isNotEmpty?? false) {
+      return lookup[minIndex]!.first;
+    }
+    if (minIndex == 0 && counts.isNotEmpty) {
+      while (lookup[minIndex]?.isEmpty ?? true) {
+        minIndex++;
+      }
+      return lookup[minIndex]!.first;
+    }
+    return '';
   }
 }
