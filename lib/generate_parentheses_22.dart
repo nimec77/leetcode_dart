@@ -5,7 +5,7 @@ class GenerateParentheses22 {
     return result;
   }
 
-  String _generateParenthesis(
+  void _generateParenthesis(
     List<String> result,
     String s,
     int open,
@@ -14,7 +14,7 @@ class GenerateParentheses22 {
   ) {
     if (s.length == max * 2) {
       result.add(s);
-      return s;
+      return;
     }
     if (open < max) {
       _generateParenthesis(result, '$s(', open + 1, close, max);
@@ -22,6 +22,5 @@ class GenerateParentheses22 {
     if (close < open) {
       _generateParenthesis(result, '$s)', open, close + 1, max);
     }
-    return s;
   }
 }
